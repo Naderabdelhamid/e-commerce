@@ -1,0 +1,77 @@
+<section
+  class="bg-gray-200 rounded-lg border border-gray-200 p-4 shadow-md md:w-1/2 my-10 mx-auto"
+>
+  <h1 class="mb-6 title-main">Register Now</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <app-input
+      [control]="registerForm.get('name')"
+      [typeInput]="'text'"
+      [idInput]="'name'"
+      [labelInput]="'Name'"
+    ></app-input>
+
+    <app-input
+      [control]="registerForm.get('email')"
+      [typeInput]="'email'"
+      [idInput]="'email'"
+      [labelInput]="'Email'"
+    ></app-input>
+
+    <app-input
+      [control]="registerForm.get('password')"
+      [idInput]="'password'"
+      [labelInput]="'Password'"
+    >
+      Custom field should match the pattern
+    </app-input>
+
+    <app-input
+      [control]="registerForm.get('rePassword')"
+      [idInput]="'rePassword'"
+      [labelInput]="'RePassword'"
+    >
+    </app-input>
+
+    <app-input
+      [control]="registerForm.get('phone')"
+      [typeInput]="'tel'"
+      [idInput]="'phone'"
+      [labelInput]="'Phone'"
+    >
+      accept only egyptian phone numbers
+    </app-input>
+
+    <!-- هنا انا اديك كلاس مختلف للبوتم لكن اللاساسي btn-main -->
+
+    <button
+      class="w-full cursor-pointer bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 mt-3"
+      type="submit"
+    >
+      Register
+
+      <span>
+        <!-- او بدل ال fa-spin  في ف التيلوند عندنا    animate-spin -->
+        @if (isLoading) {
+        <i class="fas fa-spinner fa-spin ml-2"></i>
+
+        }
+      </span>
+    </button>
+    <!-- @if (msError) {
+    <p class="text-center bg-red-200 text-red-900 mt-4 p-4">{{ msError }}</p>
+
+    } -->
+  </form>
+  <div
+    class="toast-box"
+    *ngIf="toastMessage"
+    [ngClass]="{
+      'toast-success': toastType === 'success',
+      'toast-error': toastType === 'error',
+      'toast-info': toastType === 'info'
+    }"
+  >
+    {{ toastMessage }}
+  </div>
+</section>

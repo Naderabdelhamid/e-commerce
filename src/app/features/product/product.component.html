@@ -1,0 +1,22 @@
+<section class="bg-gray-100 py-14 border border-gray-400 px-4">
+  <div class="container px-4">
+    <h2 class="title-main">Products List</h2>
+    <div
+      class="parent mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+    >
+      @for (product of productsList | paginate: { id: 'foo', itemsPerPage:
+      pageSize, currentPage: p, totalItems: total } ; track product.id) {
+      <app-card [product]="product"></app-card>
+
+      }
+    </div>
+    <div class="flex justify-center items-center mt-4">
+      <pagination-controls
+        class="my-pagination"
+        id="foo"
+        (pageChange)="getAllProductsData($event)"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+</section>
