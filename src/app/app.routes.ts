@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './core/layouts/blank-layout/blank-layout.component';
@@ -15,6 +14,7 @@ import { NotfoundDetailsComponent } from './features/notfound.details/notfound.d
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+
   {
     path: '',
     component: AuthLayoutComponent,
@@ -27,6 +27,7 @@ export const routes: Routes = [
       },
     ],
   },
+
   {
     path: '',
     component: BlankLayoutComponent,
@@ -40,16 +41,14 @@ export const routes: Routes = [
         component: CategoriesComponent,
         title: 'Categories Page',
       },
+
+      // ✅ Route اللي فيه dynamic params
       {
         path: 'details/:slug/:id',
         component: DetailsComponent,
         title: 'Details Page',
       },
-      {
-        path: 'details/:id',
-        component: DetailsComponent,
-        title: 'Details Page',
-      },
+
       {
         path: 'checkout',
         component: CheckoutComponent,
@@ -57,5 +56,21 @@ export const routes: Routes = [
       },
     ],
   },
+
   { path: '**', component: NotfoundDetailsComponent, title: 'EROR page 404' },
 ];
+
+// ✅ دالة getPrerenderParams اللي بتجيب البيانات ديناميك من الـ API
+export async function getPrerenderParams() {
+  const res = await fetch('https://ecommerce.routemisr.com/api/v1/products');
+  const data = await res.json();
+
+  // الـ API بيرجع البيانات في data.data (حسب وثائق RouteMisr)
+  const products = data.data;
+
+  // رجّع مصفوفة من كل القيم اللي Angular هيبني بيها الصفحات
+  return products.map((product: any) => ({
+    slug: product.slug,
+    id: product.id,
+  }));
+}
