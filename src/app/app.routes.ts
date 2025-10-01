@@ -59,18 +59,3 @@ export const routes: Routes = [
 
   { path: '**', component: NotfoundDetailsComponent, title: 'EROR page 404' },
 ];
-
-// ✅ دالة getPrerenderParams اللي بتجيب البيانات ديناميك من الـ API
-export async function getPrerenderParams() {
-  const res = await fetch('https://ecommerce.routemisr.com/api/v1/products');
-  const data = await res.json();
-
-  // الـ API بيرجع البيانات في data.data (حسب وثائق RouteMisr)
-  const products = data.data;
-
-  // رجّع مصفوفة من كل القيم اللي Angular هيبني بيها الصفحات
-  return products.map((product: any) => ({
-    slug: product.slug,
-    id: product.id,
-  }));
-}
