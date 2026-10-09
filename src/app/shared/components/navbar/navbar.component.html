@@ -1,163 +1,262 @@
-<nav class="bg-gray-300 border-gray-200">
-  <div
-    class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto py-3 px-4"
-  >
-    <a
-      routerLink="/home"
-      class="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer"
-    >
-      <img src="/images/freshcart-logo.svg" alt=" Logo Image" />
-    </a>
-    <button
-      data-collapse-toggle="navbar-default"
-      type="button"
-      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-      aria-controls="navbar-default"
-      aria-expanded="false"
-    >
-      <span class="sr-only">Open main menu</span>
-      <svg
-        class="w-5 h-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 17 14"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M1 1h15M1 7h15M1 13h15"
-        />
-      </svg>
-    </button>
-    <div class="hidden grow w-full md:flex md:w-auto" id="navbar-default">
-      @if (isLogin === true) {
-      <ul
-        class="ms-4 font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-3 rtl:space-x-reverse md:mt-0 md:border-0"
-      >
-        <li>
+<nav class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-18">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-8">
+        <a routerLink="/home" class="flex items-center gap-2.5 group cursor-pointer" (click)="closeMobileMenu()">
+          <img src="/images/freshcart-logo.svg" alt="FreshCart" class="h-9 transition-transform duration-300 group-hover:scale-105" />
+        </a>
+
+        <!-- Desktop Navigation Links (Logged In) -->
+        @if (isLogin) {
+        <div class="hidden lg:flex items-center gap-1">
           <a
             routerLink="/home"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
+            routerLinkActive="bg-emerald-50 text-emerald-700 font-semibold shadow-xs"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 hover:text-emerald-700 hover:bg-slate-50 transition-all duration-200"
           >
             Home
           </a>
-        </li>
-        <li>
-          <a
-            routerLink="/cart"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
-          >
-            Cart
-          </a>
-        </li>
-        <li>
           <a
             routerLink="/products"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
+            routerLinkActive="bg-emerald-50 text-emerald-700 font-semibold shadow-xs"
+            class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 hover:text-emerald-700 hover:bg-slate-50 transition-all duration-200"
           >
             Products
           </a>
-        </li>
-        <li>
           <a
             routerLink="/categories"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
+            routerLinkActive="bg-emerald-50 text-emerald-700 font-semibold shadow-xs"
+            class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 hover:text-emerald-700 hover:bg-slate-50 transition-all duration-200"
           >
-            Categaries
+            Categories
           </a>
-        </li>
-        <li>
           <a
             routerLink="/brands"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
+            routerLinkActive="bg-emerald-50 text-emerald-700 font-semibold shadow-xs"
+            class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-700 hover:text-emerald-700 hover:bg-slate-50 transition-all duration-200"
           >
             Brands
           </a>
-        </li>
-      </ul>
+        </div>
+        }
+      </div>
+
+      <!-- Quick Search Bar (Desktop) -->
+      @if (isLogin) {
+      <div class="hidden md:flex flex-1 max-w-xs mx-6">
+        <form (ngSubmit)="onSearchSubmit()" class="w-full relative">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            name="searchQuery"
+            placeholder="Search products..."
+            class="w-full pl-9 pr-4 py-2 text-xs bg-slate-100 hover:bg-slate-200/70 focus:bg-white text-slate-800 rounded-full border border-transparent focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200 outline-none"
+          />
+          <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 transition-colors">
+            <i class="fas fa-search text-xs"></i>
+          </button>
+        </form>
+      </div>
       }
 
-      <ul
-        class="font-medium ms-auto flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-3 rtl:space-x-reverse md:mt-0 md:border-0"
-      >
-        <li class="flex items-center space-x-2 rtl:space-x-reverse">
+      <!-- Right Actions -->
+      <div class="flex items-center gap-3">
+        @if (isLogin) {
+          <!-- Wishlist Action -->
           <a
-            routerLink=""
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
+            routerLink="/wishlist"
+            class="relative p-2.5 rounded-xl text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200"
+            aria-label="Wishlist"
           >
-            <i class="fab fa-facebook"></i>
+            <i class="fas fa-heart text-lg"></i>
+            @if (wishlistCount() > 0) {
+              <span class="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] font-bold h-5 min-w-5 px-1 rounded-full flex items-center justify-center ring-2 ring-white animate-pulse">
+                {{ wishlistCount() }}
+              </span>
+            }
           </a>
+
+          <!-- Cart Action -->
           <a
-            routerLink=""
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
+            routerLink="/cart"
+            class="relative p-2.5 rounded-xl text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 transition-all duration-200"
+            aria-label="Cart"
           >
-            <i class="fab fa-twitter"></i>
+            <i class="fas fa-shopping-bag text-lg"></i>
+            @if (cartCount() > 0) {
+              <span class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-bold h-5 min-w-5 px-1 rounded-full flex items-center justify-center ring-2 ring-white">
+                {{ cartCount() }}
+              </span>
+            }
           </a>
-          <a
-            routerLink=""
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
+
+          <!-- User Menu Dropdown -->
+          <div class="relative hidden sm:block">
+            <button
+              (click)="toggleProfileMenu()"
+              class="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 transition-all duration-200 cursor-pointer"
+            >
+              <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center text-xs shadow-xs">
+                {{ currentUser()?.name ? (currentUser()?.name?.charAt(0)?.toUpperCase()) : 'U' }}
+              </div>
+              <span class="text-xs font-semibold text-slate-700 max-w-[100px] truncate">
+                {{ currentUser()?.name || 'Account' }}
+              </span>
+              <i class="fas fa-chevron-down text-[10px] text-slate-400"></i>
+            </button>
+
+            <!-- Dropdown Body -->
+            @if (isProfileMenuOpen()) {
+              <div
+                class="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-fadeIn"
+                (mouseleave)="closeProfileMenu()"
+              >
+                <div class="px-4 py-2 border-b border-slate-100">
+                  <p class="text-xs text-slate-400 font-medium">Signed in as</p>
+                  <p class="text-sm font-bold text-slate-800 truncate">{{ currentUser()?.name || 'Customer' }}</p>
+                </div>
+
+                <a
+                  routerLink="/allorders"
+                  (click)="closeProfileMenu()"
+                  class="flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                >
+                  <i class="fas fa-receipt text-slate-400"></i>
+                  My Orders
+                </a>
+
+                <a
+                  routerLink="/wishlist"
+                  (click)="closeProfileMenu()"
+                  class="flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                >
+                  <i class="fas fa-heart text-slate-400"></i>
+                  My Wishlist
+                </a>
+
+                <div class="border-t border-slate-100 my-1"></div>
+
+                <button
+                  (click)="signOut()"
+                  class="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-medium text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
+                >
+                  <i class="fas fa-sign-out-alt"></i>
+                  Sign Out
+                </button>
+              </div>
+            }
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button
+            (click)="toggleMobileMenu()"
+            class="lg:hidden p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Toggle Navigation"
           >
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a
-            routerLink=""
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
-          >
-            <i class="fab fa-instagram"></i>
-          </a>
-        </li>
-        @if (isLogin === false) {
-        <li>
-          <a
-            routerLink="/login"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
-          >
-            Login
-          </a>
-        </li>
-        <li>
-          <a
-            routerLink="/register"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
-          >
-            Register
-          </a>
-        </li>
+            <i [class]="isMobileMenuOpen() ? 'fas fa-times text-xl' : 'fas fa-bars text-xl'"></i>
+          </button>
         } @else {
-        <li>
-          <a
-            (click)="sigOut()"
-            routerLink="/login"
-            routerLinkActive="text-white bg-green-500"
-            class="block py-2 px-3 cursor-pointer rounded-sm md:p-1 text-gray-600 hover:text-green-800 transition-colors duration-300"
-            aria-current="page"
-          >
-            SingOut
-          </a>
-        </li>
+          <!-- Guest Navigation (Auth Layout) -->
+          <div class="flex items-center gap-3">
+            <a
+              routerLink="/login"
+              class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-emerald-600 transition-colors"
+            >
+              Sign In
+            </a>
+            <a
+              routerLink="/register"
+              class="btn-primary text-sm !py-2 !px-5"
+            >
+              Get Started
+            </a>
+          </div>
         }
-      </ul>
+      </div>
     </div>
   </div>
+
+  <!-- Mobile Drawer Menu (Logged In) -->
+  @if (isLogin && isMobileMenuOpen()) {
+    <div class="lg:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-3 pb-6 space-y-3 animate-fadeIn">
+      <!-- Mobile Search Form -->
+      <form (ngSubmit)="onSearchSubmit()" class="relative mb-3">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          name="mobileSearch"
+          placeholder="Search products..."
+          class="w-full pl-9 pr-4 py-2.5 text-sm bg-slate-100 text-slate-800 rounded-xl border border-transparent focus:border-emerald-500 focus:bg-white outline-none"
+        />
+        <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+
+      <!-- Nav Links -->
+      <div class="grid grid-cols-2 gap-2">
+        <a
+          routerLink="/home"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-emerald-50 text-emerald-700 font-bold"
+          class="flex items-center gap-2 p-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100"
+        >
+          <i class="fas fa-home text-emerald-600"></i>
+          Home
+        </a>
+        <a
+          routerLink="/products"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-emerald-50 text-emerald-700 font-bold"
+          class="flex items-center gap-2 p-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100"
+        >
+          <i class="fas fa-box text-emerald-600"></i>
+          Products
+        </a>
+        <a
+          routerLink="/categories"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-emerald-50 text-emerald-700 font-bold"
+          class="flex items-center gap-2 p-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100"
+        >
+          <i class="fas fa-th-large text-emerald-600"></i>
+          Categories
+        </a>
+        <a
+          routerLink="/brands"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-emerald-50 text-emerald-700 font-bold"
+          class="flex items-center gap-2 p-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100"
+        >
+          <i class="fas fa-tag text-emerald-600"></i>
+          Brands
+        </a>
+      </div>
+
+      <div class="border-t border-slate-100 pt-3 space-y-2">
+        <a
+          routerLink="/allorders"
+          (click)="closeMobileMenu()"
+          class="flex items-center justify-between p-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100"
+        >
+          <span class="flex items-center gap-2">
+            <i class="fas fa-receipt text-slate-400"></i>
+            My Orders
+          </span>
+          <i class="fas fa-chevron-right text-xs text-slate-300"></i>
+        </a>
+
+        <button
+          (click)="signOut()"
+          class="w-full flex items-center justify-center gap-2 p-3 rounded-xl text-sm font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 transition-colors"
+        >
+          <i class="fas fa-sign-out-alt"></i>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  }
 </nav>

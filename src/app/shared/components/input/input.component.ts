@@ -12,5 +12,6 @@ export class InputComponent {
   @Input() typeInput!: string;
   @Input() idInput!: string;
   @Input() labelInput!: string;
+  @Input() iconClass: string = '';
   flag: boolean = true;
 }

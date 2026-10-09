@@ -1,16 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './core/layouts/blank-layout/blank-layout.component';
-import { LoginComponent } from './core/auth/login/login.component';
-import { RegisterComponent } from './core/auth/register/register.component';
-import { HomeComponent } from './features/home/home.component';
-import { CartComponent } from './features/cart/cart.component';
-import { ProductComponent } from './features/product/product.component';
-import { BrandsComponent } from './features/brands/brands.component';
-import { CategoriesComponent } from './features/categories/categories.component';
-import { DetailsComponent } from './features/details/details.component';
-import { CheckoutComponent } from './features/checkout/checkout.component';
-import { NotfoundDetailsComponent } from './features/notfound.details/notfound.details.component';
 import { authGuard } from './core/guards/auth-guard';
 import { isLoggedGuard } from './core/guards/is-logged-guard';
 
@@ -21,13 +11,30 @@ export const routes: Routes = [
     path: '',
     component: AuthLayoutComponent,
     canActivate: [isLoggedGuard],
-
     children: [
-      { path: 'login', component: LoginComponent, title: 'Login Page' },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./core/auth/login/login.component').then(
+            (m) => m.LoginComponent
+          ),
+        title: 'Login - FreshCart',
+      },
       {
         path: 'register',
-        component: RegisterComponent,
-        title: 'Register Page',
+        loadComponent: () =>
+          import('./core/auth/register/register.component').then(
+            (m) => m.RegisterComponent
+          ),
+        title: 'Register - FreshCart',
+      },
+      {
+        path: 'forgot-password',
+        loadComponent: () =>
+          import(
+            './core/auth/forgot-password/forgot-password.component'
+          ).then((m) => m.ForgotPasswordComponent),
+        title: 'Forgot Password - FreshCart',
       },
     ],
   },
@@ -39,32 +46,81 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: HomeComponent,
-        title: 'Home Page',
+        loadComponent: () =>
+          import('./features/home/home.component').then((m) => m.HomeComponent),
+        title: 'Home - FreshCart',
       },
-      { path: 'cart', component: CartComponent, title: 'Cart Page' },
-      { path: 'products', component: ProductComponent, title: 'Products Page' },
-      { path: 'brands', component: BrandsComponent, title: 'Brands Page' },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./features/cart/cart.component').then((m) => m.CartComponent),
+        title: 'Cart - FreshCart',
+      },
+      {
+        path: 'wishlist',
+        loadComponent: () =>
+          import('./features/wishlist/wishlist.component').then(
+            (m) => m.WishlistComponent
+          ),
+        title: 'Wishlist - FreshCart',
+      },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./features/product/product.component').then(
+            (m) => m.ProductComponent
+          ),
+        title: 'Products - FreshCart',
+      },
+      {
+        path: 'brands',
+        loadComponent: () =>
+          import('./features/brands/brands.component').then(
+            (m) => m.BrandsComponent
+          ),
+        title: 'Brands - FreshCart',
+      },
       {
         path: 'categories',
-        component: CategoriesComponent,
-        title: 'Categories Page',
+        loadComponent: () =>
+          import('./features/categories/categories.component').then(
+            (m) => m.CategoriesComponent
+          ),
+        title: 'Categories - FreshCart',
       },
-
-      // ✅ Route اللي فيه dynamic params
       {
         path: 'details/:slug/:id',
-        component: DetailsComponent,
-        title: 'Details Page',
+        loadComponent: () =>
+          import('./features/details/details.component').then(
+            (m) => m.DetailsComponent
+          ),
+        title: 'Product Details - FreshCart',
       },
-
       {
         path: 'checkout',
-        component: CheckoutComponent,
-        title: 'Checkout Page',
+        loadComponent: () =>
+          import('./features/checkout/checkout.component').then(
+            (m) => m.CheckoutComponent
+          ),
+        title: 'Checkout - FreshCart',
+      },
+      {
+        path: 'allorders',
+        loadComponent: () =>
+          import('./features/orders/orders.component').then(
+            (m) => m.OrdersComponent
+          ),
+        title: 'My Orders - FreshCart',
       },
     ],
   },
 
-  { path: '**', component: NotfoundDetailsComponent, title: 'EROR page 404' },
+  {
+    path: '**',
+    loadComponent: () =>
+      import(
+        './features/notfound.details/notfound.details.component'
+      ).then((m) => m.NotfoundDetailsComponent),
+    title: '404 Not Found - FreshCart',
+  },
 ];

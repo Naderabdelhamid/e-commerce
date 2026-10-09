@@ -1,7 +1,11 @@
-<!-- navbar auth -->
+<div class="min-h-screen flex flex-col bg-linear-to-br from-slate-50 via-emerald-50/20 to-slate-100">
+  <!-- Minimal Auth Navbar -->
+  <header>
+    <app-navbar [isLogin]="false"></app-navbar>
+  </header>
 
-<app-navbar [isLogin]="false" />
-
-<!-- login - register -->
-
-<router-outlet></router-outlet>
+  <!-- Auth Content Container -->
+  <main class="flex-1 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,23 +1,31 @@
 <section>
-  <div class="relative mb-1">
+  <div class="auth-input-wrapper relative mb-4">
+    <!-- Icon -->
+    @if (iconClass) {
+    <span class="auth-input-icon">
+      <i [class]="iconClass"></i>
+    </span>
+    }
+
     <input
       [class]="{
-        'border-green-700': control?.valid,
-        'border-red-700': control?.invalid && control?.touched
+        'border-[#22C55E]! ring-2 ring-[#22C55E]/20': control?.valid && control?.touched,
+        'border-[#EF4444]! ring-2 ring-[#EF4444]/20': control?.invalid && control?.touched
       }"
       [formControl]="control"
       [type]="typeInput || (flag ? 'password' : 'text')"
       [id]="idInput"
+      [class.has-icon]="iconClass"
       class="main-input peer"
       placeholder=" "
     />
     <label
       [class]="{
-        'text-green-700': control?.valid,
-        'text-red-700': control?.invalid && control?.touched
+        'text-[#22C55E]!': control?.valid && control?.touched,
+        'text-[#EF4444]!': control?.invalid && control?.touched
       }"
       [for]="idInput"
-      class="main-label"
+      [class]="iconClass ? 'main-label' : 'main-label-no-icon'"
     >
       {{ labelInput }}
     </label>
@@ -25,38 +33,40 @@
 
     <span
       (click)="flag = !flag"
-      class="absolute top-1/2 end-4 -translate-y-1/2 cursor-pointer"
+      class="absolute top-1/2 end-4 -translate-y-1/2 cursor-pointer text-[#6B7280] hover:text-[#111827] transition-colors duration-200 z-10"
     >
-      <i class="fas fa-eye"></i>
+      <i [class]="flag ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
     </span>
 
-    } @if (control?.touched && control?.errors) {
-    <div
-      class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
-      role="alert"
-    >
-      <ul class="mt-1.5 ml-4 list-disc list-inside">
-        @if (control?.hasError('required')) {
-        <li>Input is required</li>
-
-        } @if (control?.hasError('email')) {
-        <li>Please enter a valid email address</li>
-
-        } @if (control?.hasError('pattern')) {
-        <li><ng-content /></li>
-
-        } @if (control?.hasError('minlength')) {
-        <li>Input should be more than or equal 2 chars</li>
-
-        } @if (control?.hasError('maxlength')) {
-
-        <li>Input should be less than or equal 20 chars</li>
-        } @if (control?.hasError('mismatch')) {
-
-        <li>Password confirmation is incorrect</li>
-        }
-      </ul>
-    </div>
     }
   </div>
+  @if (control?.touched && control?.errors) {
+  <div
+    class="flex items-start gap-2 px-3 py-2.5 mb-3 text-sm text-[#EF4444] rounded-lg bg-red-50 border border-red-100"
+    role="alert"
+  >
+    <i class="fas fa-exclamation-circle mt-0.5 shrink-0"></i>
+    <ul class="list-none space-y-0.5">
+      @if (control?.hasError('required')) {
+      <li>{{ labelInput }} is required</li>
+
+      } @if (control?.hasError('email')) {
+      <li>Please enter a valid email address</li>
+
+      } @if (control?.hasError('pattern')) {
+      <li><ng-content /></li>
+
+      } @if (control?.hasError('minlength')) {
+      <li>{{ labelInput }} should be at least 3 characters</li>
+
+      } @if (control?.hasError('maxlength')) {
+
+      <li>{{ labelInput }} should be at most 20 characters</li>
+      } @if (control?.hasError('mismatch')) {
+
+      <li>Password confirmation does not match</li>
+      }
+    </ul>
+  </div>
+  }
 </section>

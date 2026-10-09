@@ -1,23 +1,19 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
-  ReactiveFormsModule,
   FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { InputComponent } from '../../../shared/components/input/input.component';
-import { ToastService } from '../services/toast.service';
-import { CommonModule, NgClass } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, InputComponent, NgClass, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -25,98 +21,51 @@ export class LoginComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
-  private readonly toast = inject(ToastService);
+  private readonly toastr = inject(ToastrService);
   private readonly cookieService = inject(CookieService);
-  toastMessage: string = '';
-  toastType: 'success' | 'error' | 'info' = 'info';
-
-  subscription: Subscription = new Subscription();
-  flag: boolean = true;
-
-  msError: string = '';
-  isLoading: boolean = false;
-
-  // بص دي الطريقه الاولي الي تحتها الطريقه التانيه الي قالها ف اخر فيديو هو قال انها احسن واسهل
-
-  /*   loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [
-      Validators.required,
-      Validators.pattern('^[A-Z][a-z0-9]{3,8}$'),
-    ]),
-  }); */
-
-  //  طريقه تانيه ينفع اكريت بيها الفورم بتاعتي
-
-  // عشان السينتاكس بتاعتها ابسط
 
   loginForm!: FormGroup;
-
-  //
+  isLoading = false;
+  showPassword = false;
 
   ngOnInit(): void {
     this.initForm();
-    this.showToast('Welcome! Please Login to continue.', 'info');
   }
 
   initForm(): void {
     this.loginForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [
-        null,
-        [Validators.required, Validators.pattern('^[A-Z][a-z0-9]{3,8}$')],
-      ],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  showToast(message: string, type: 'success' | 'error' | 'info' = 'info') {
-    this.toastMessage = message;
-    this.toastType = type;
 
-    setTimeout(() => {
-      this.toastMessage = '';
-    }, 4000); // 4 ثواني و تختفي تلقائيًا
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
+
   submitForm(): void {
-    if (this.loginForm.valid) {
-      this.isLoading = true;
-
-      this.subscription.unsubscribe();
-
-      this.subscription = this.authService
-        .loginForm(this.loginForm.value)
-        .subscribe({
-          next: (res) => {
-            if (res.message === 'success') {
-              this.showToast('Login successful 🎉', 'success');
-
-              this.msError = '';
-              // save token in local storage
-              this.cookieService.set('token', res.token);
-
-              // navigate to home path home
-
-              setTimeout(() => {
-                this.router.navigate(['/home']);
-              }, 500);
-            }
-            this.isLoading = false;
-          },
-          error: (err) => {
-            // show error message
-            this.msError = err.error.message;
-            this.showToast(
-              err.error.message || 'Something went wrong',
-              'error'
-            );
-
-            this.isLoading = false;
-          },
-        });
-    } else {
-      // show all error message
-      this.loginForm.setErrors({ mismatch: true }); // بيظهر اي ايرور موجود عموما
+    if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-      this.showToast('Please fix the errors in the form', 'error');
+      this.toastr.warning('Please enter valid email and password', 'Validation Error');
+      return;
     }
+
+    this.isLoading = true;
+    this.authService.loginForm(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        if (res.message === 'success' || res.token) {
+          this.cookieService.set('token', res.token);
+          this.authService.syncUser();
+          this.toastr.success('Welcome back to FreshCart!', 'Login Successful');
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        const msg = err.error?.message || 'Invalid email or password';
+        this.toastr.error(msg, 'Authentication Failed');
+      },
+    });
   }
 }

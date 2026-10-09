@@ -1,4 +1,14 @@
-<!-- blank-navbar -->
-<app-navbar [isLogin]="true" />
-<!-- main content  ---=> home ,product , details , art , chackout , .....  -->
-<router-outlet></router-outlet>
+<div class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
+  <!-- Sticky Header Navbar -->
+  <header class="sticky top-0 z-50">
+    <app-navbar [isLogin]="true"></app-navbar>
+  </header>
+
+  <!-- Main View Area -->
+  <main class="flex-1">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Global Footer -->
+  <app-footer></app-footer>
+</div>

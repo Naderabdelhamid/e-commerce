@@ -1,0 +1,32 @@
+/* Icon positioning inside input wrapper */
+.auth-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6B7280;
+  font-size: 14px;
+  z-index: 5;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+/* Shift input text when icon is present */
+.has-icon {
+  padding-left: 2.5rem !important;
+}
+
+/* Icon color follows focus */
+.auth-input-wrapper:focus-within .auth-input-icon {
+  color: #22C55E;
+}
+
+/* Icon turns red on invalid + touched */
+.auth-input-wrapper:has(input.ng-invalid.ng-touched) .auth-input-icon {
+  color: #EF4444;
+}
+
+/* Icon turns green on valid + touched */
+.auth-input-wrapper:has(input.ng-valid.ng-touched) .auth-input-icon {
+  color: #22C55E;
+}
