@@ -19,11 +19,6 @@ export class ProductsService {
   ): Observable<ProductsResponse> {
     let params = new HttpParams().set('page', String(pageNumber));
 
-    const keyword = filters.keyword?.trim();
-    if (keyword) {
-      params = params.set('keyword', keyword);
-    }
-
     if (filters.priceGte != null && !Number.isNaN(filters.priceGte)) {
       params = params.set('price[gte]', String(filters.priceGte));
     }

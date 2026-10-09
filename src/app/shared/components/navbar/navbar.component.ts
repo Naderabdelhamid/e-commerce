@@ -73,12 +73,17 @@ export class NavbarComponent implements OnInit {
   }
 
   onSearchSubmit(): void {
-    if (this.searchQuery.trim()) {
+    const q = this.searchQuery.trim();
+    if (q) {
       this.router.navigate(['/products'], {
-        queryParams: { keyword: this.searchQuery.trim() },
+        queryParams: { keyword: q },
       });
-      this.closeMobileMenu();
+    } else {
+      this.router.navigate(['/products'], {
+        queryParams: {},
+      });
     }
+    this.closeMobileMenu();
   }
 
   signOut(): void {
