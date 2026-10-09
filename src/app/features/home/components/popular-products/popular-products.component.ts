@@ -4,9 +4,11 @@ import { Product } from '../../../../core/models/product.interface';
 import { ProductsService } from '../../../../core/services/products/products.service';
 import { RouterLink } from '@angular/router';
 
+import { TransPipe } from '../../../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-popular-products',
-  imports: [CardComponent, RouterLink],
+  imports: [CardComponent, RouterLink, TransPipe],
   templateUrl: './popular-products.component.html',
   styleUrl: './popular-products.component.css',
 })

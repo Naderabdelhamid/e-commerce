@@ -9,9 +9,11 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-details',
-  imports: [CommonModule, RouterLink, CardComponent],
+  imports: [CommonModule, RouterLink, CardComponent, TransPipe],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })

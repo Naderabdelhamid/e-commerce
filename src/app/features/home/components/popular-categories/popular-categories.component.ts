@@ -3,6 +3,7 @@ import { CategoriesService } from '../../../../core/services/categories/categori
 import { Category } from '../../../../core/models/category.interface';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
+import { TranslationService } from '../../../../core/services/translation/translation.service';
 
 @Component({
   selector: 'app-popular-categories',
@@ -11,6 +12,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './popular-categories.component.css',
 })
 export class PopularCategoriesComponent implements OnInit {
+  private readonly categoriesService = inject(CategoriesService);
+  readonly transService = inject(TranslationService);
+
   categoriesOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -31,11 +35,14 @@ export class PopularCategoriesComponent implements OnInit {
     nav: false,
   };
 
-  private readonly categoriesService = inject(CategoriesService);
   categoriserList: Category[] = [];
 
   ngOnInit(): void {
     this.getAllCategoriesData();
+  }
+
+  t(key: string): string {
+    return this.transService.translate(key);
   }
 
   getAllCategoriesData(): void {

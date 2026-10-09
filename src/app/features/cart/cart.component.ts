@@ -8,9 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-cart',
-  imports: [DecimalPipe, FormsModule, CommonModule, RouterLink],
+  imports: [DecimalPipe, FormsModule, CommonModule, RouterLink, TransPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })

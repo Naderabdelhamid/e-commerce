@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
+import { TranslationService } from '../../../../core/services/translation/translation.service';
 
 @Component({
   selector: 'app-main-slider',
@@ -9,6 +10,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './main-slider.component.css',
 })
 export class MainSliderComponent {
+  readonly transService = inject(TranslationService);
+
   mainOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -21,4 +24,8 @@ export class MainSliderComponent {
     items: 1,
     nav: false,
   };
+
+  t(key: string): string {
+    return this.transService.translate(key);
+  }
 }

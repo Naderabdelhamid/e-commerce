@@ -12,9 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-product',
-  imports: [CardComponent, NgxPaginationModule, FormsModule, CommonModule],
+  imports: [CardComponent, NgxPaginationModule, FormsModule, CommonModule, TransPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css',
 })

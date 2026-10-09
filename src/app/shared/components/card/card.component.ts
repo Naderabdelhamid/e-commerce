@@ -7,9 +7,11 @@ import { CartService } from '../../../features/cart/services/cart.service';
 import { WishlistService } from '../../../features/wishlist/services/wishlist.service';
 import { ToastrService } from 'ngx-toastr';
 
+import { TransPipe } from '../../pipes/trans.pipe';
+
 @Component({
   selector: 'app-card',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, TransPipe],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })

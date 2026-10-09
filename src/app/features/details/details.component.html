@@ -23,18 +23,18 @@
   } @else {
     
     <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-8 overflow-x-auto whitespace-nowrap">
-      <a routerLink="/home" class="hover:text-emerald-600 transition-colors">Home</a>
-      <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
-      <a routerLink="/products" class="hover:text-emerald-600 transition-colors">Products</a>
+    <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
+      <a routerLink="/home" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">{{ 'navHome' | trans }}</a>
+      <i class="fas fa-chevron-right rtl:rotate-180 text-[10px] text-slate-400"></i>
+      <a routerLink="/products" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">{{ 'navProducts' | trans }}</a>
       @if (ProductDetails.category.name) {
-        <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
-        <a [routerLink]="['/products']" [queryParams]="{ category: ProductDetails.category._id }" class="hover:text-emerald-600 transition-colors">
+        <i class="fas fa-chevron-right rtl:rotate-180 text-[10px] text-slate-400"></i>
+        <a [routerLink]="['/products']" [queryParams]="{ category: ProductDetails.category._id }" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
           {{ ProductDetails.category.name }}
         </a>
       }
-      <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
-      <span class="text-slate-800 font-semibold truncate max-w-xs">{{ ProductDetails.title }}</span>
+      <i class="fas fa-chevron-right rtl:rotate-180 text-[10px] text-slate-400"></i>
+      <span class="text-slate-800 dark:text-slate-200 font-semibold truncate max-w-xs">{{ ProductDetails.title }}</span>
     </nav>
 
     <!-- Product Details Main Layout -->
@@ -43,7 +43,7 @@
       <!-- Left Column: Gallery (6 cols) -->
       <div class="md:col-span-6 space-y-4">
         <!-- Main Image Frame -->
-        <div class="aspect-square rounded-3xl bg-white border border-slate-200/80 p-8 flex items-center justify-center relative overflow-hidden shadow-xs">
+        <div class="aspect-square rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-8 flex items-center justify-center relative overflow-hidden shadow-xs">
           <img
             [src]="imageCover"
             [alt]="ProductDetails.title"
@@ -55,9 +55,9 @@
             type="button"
             (click)="toggleWishlist()"
             [disabled]="isTogglingWishlist"
-            class="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur-xs border border-slate-200 shadow-md flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer"
+            class="absolute top-4 right-4 rtl:right-auto rtl:left-4 w-11 h-11 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-xs border border-slate-200 dark:border-slate-700 shadow-md flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer"
           >
-            <i [class]="isWishlisted() ? 'fas fa-heart text-rose-500 text-lg' : 'far fa-heart text-slate-400 text-lg'"></i>
+            <i [class]="isWishlisted() ? 'fas fa-heart text-rose-500 text-lg' : 'far fa-heart text-slate-400 dark:text-slate-500 text-lg'"></i>
           </button>
         </div>
 
@@ -68,8 +68,8 @@
               <button
                 type="button"
                 (click)="changeImage(img)"
-                [class]="imageCover === img ? 'border-emerald-600 ring-2 ring-emerald-500/20' : 'border-slate-200 hover:border-slate-300'"
-                class="aspect-square rounded-2xl bg-white border p-2 flex items-center justify-center overflow-hidden transition-all cursor-pointer"
+                [class]="imageCover === img ? 'border-emerald-600 ring-2 ring-emerald-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'"
+                class="aspect-square rounded-2xl bg-white dark:bg-slate-800 border p-2 flex items-center justify-center overflow-hidden transition-all cursor-pointer"
               >
                 <img [src]="img" class="max-h-full max-w-full object-contain" alt="Thumbnail" />
               </button>
@@ -96,34 +96,34 @@
         </div>
 
         <!-- Product Title -->
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
           {{ ProductDetails.title }}
         </h1>
 
         <!-- Rating & Sales Bar -->
-        <div class="flex items-center gap-4 text-xs font-semibold text-slate-600 pb-4 border-b border-slate-100">
-          <div class="flex items-center gap-1.5 bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg">
+        <div class="flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300 pb-4 border-b border-slate-100 dark:border-slate-800">
+          <div class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 px-2.5 py-1 rounded-lg">
             <i class="fas fa-star text-amber-500"></i>
-            <span>{{ ProductDetails.ratingsAverage || 4.5 }} Rating</span>
+            <span>{{ ProductDetails.ratingsAverage || 4.5 }}</span>
           </div>
           <span>•</span>
-          <span class="text-emerald-700 font-bold">
-            <i class="fas fa-check-circle mr-1"></i> In Stock & Ready to Ship
+          <span class="text-emerald-700 dark:text-emerald-400 font-bold">
+            <i class="fas fa-check-circle mr-1 rtl:mr-0 rtl:ml-1"></i> {{ 'detInStock' | trans }}
           </span>
         </div>
 
         <!-- Price Display -->
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl sm:text-4xl font-extrabold text-slate-900">
+          <span class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
             {{ ProductDetails.price }}
           </span>
-          <span class="text-base font-bold text-slate-500">EGP</span>
+          <span class="text-base font-bold text-slate-500 dark:text-slate-400">{{ 'cardEgp' | trans }}</span>
         </div>
 
         <!-- Description -->
         <div class="space-y-2">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">About this item</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">{{ 'detAboutItem' | trans }}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
             {{ ProductDetails.description }}
           </p>
         </div>
@@ -132,19 +132,19 @@
         <div class="pt-4 space-y-4">
           <div class="flex items-center gap-4">
             <!-- Quantity Counter -->
-            <div class="flex items-center bg-slate-100 rounded-2xl p-1 border border-slate-200">
+            <div class="flex items-center bg-slate-100 dark:bg-slate-800 rounded-2xl p-1 border border-slate-200 dark:border-slate-700">
               <button
                 type="button"
                 (click)="decrementQuantity()"
-                class="w-9 h-9 rounded-xl bg-white hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+                class="w-9 h-9 rounded-xl bg-white dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 flex items-center justify-center transition-colors cursor-pointer"
               >
                 <i class="fas fa-minus text-xs"></i>
               </button>
-              <span class="w-12 text-center text-sm font-bold text-slate-800">{{ quantity }}</span>
+              <span class="w-12 text-center text-sm font-bold text-slate-800 dark:text-slate-100">{{ quantity }}</span>
               <button
                 type="button"
                 (click)="incrementQuantity()"
-                class="w-9 h-9 rounded-xl bg-white hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+                class="w-9 h-9 rounded-xl bg-white dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 flex items-center justify-center transition-colors cursor-pointer"
               >
                 <i class="fas fa-plus text-xs"></i>
               </button>
@@ -158,31 +158,31 @@
               class="btn-primary flex-1 py-3.5 text-sm"
             >
               @if (isAdding) {
-                <i class="fas fa-spinner fa-spin mr-2"></i> Adding to Cart...
+                <i class="fas fa-spinner fa-spin mr-2 rtl:mr-0 rtl:ml-2"></i> {{ 'cardAdding' | trans }}
               } @else {
-                <i class="fas fa-cart-plus mr-2"></i> Add to Cart ({{ ProductDetails.price * quantity }} EGP)
+                <i class="fas fa-cart-plus mr-2 rtl:mr-0 rtl:ml-2"></i> {{ 'cardAddToCart' | trans }} ({{ ProductDetails.price * quantity }} {{ 'cardEgp' | trans }})
               }
             </button>
           </div>
         </div>
 
         <!-- Perks Features -->
-        <div class="grid grid-cols-2 gap-3 pt-6 border-t border-slate-100 text-xs text-slate-600">
+        <div class="grid grid-cols-2 gap-3 pt-6 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
           <div class="flex items-center gap-2">
-            <i class="fas fa-truck text-emerald-600"></i>
-            <span>Fast Express Delivery</span>
+            <i class="fas fa-truck text-emerald-600 dark:text-emerald-400"></i>
+            <span>{{ 'detFastDelivery' | trans }}</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="fas fa-shield text-emerald-600"></i>
-            <span>100% Genuine Guaranteed</span>
+            <i class="fas fa-shield text-emerald-600 dark:text-emerald-400"></i>
+            <span>{{ 'detGenuine' | trans }}</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="fas fa-arrow-rotate-left text-emerald-600"></i>
-            <span>14 Days Return Window</span>
+            <i class="fas fa-arrow-rotate-left text-emerald-600 dark:text-emerald-400"></i>
+            <span>{{ 'detReturnWindow' | trans }}</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="fas fa-lock text-emerald-600"></i>
-            <span>Secure Encrypted Payment</span>
+            <i class="fas fa-lock text-emerald-600 dark:text-emerald-400"></i>
+            <span>{{ 'detEncrypted' | trans }}</span>
           </div>
         </div>
 
@@ -192,8 +192,8 @@
 
     <!-- Related Products Section -->
     @if (relatedProducts.length > 0) {
-      <div class="pt-12 border-t border-slate-200">
-        <h2 class="text-2xl font-extrabold text-slate-900 mb-6">Similar Products You Might Like</h2>
+      <div class="pt-12 border-t border-slate-200 dark:border-slate-800">
+        <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-6">{{ 'detSimilarProducts' | trans }}</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
           @for (prod of relatedProducts; track prod._id) {
             <app-card [product]="prod"></app-card>

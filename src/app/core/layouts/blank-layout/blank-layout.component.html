@@ -1,4 +1,4 @@
-<div class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
+<div class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
   <!-- Sticky Header Navbar -->
   <header class="sticky top-0 z-50">
     <app-navbar [isLogin]="true"></app-navbar>
@@ -9,6 +9,6 @@
     <router-outlet></router-outlet>
   </main>
 
-  <!-- Global Footer -->
+  <!-- Layout Footer -->
   <app-footer></app-footer>
 </div>

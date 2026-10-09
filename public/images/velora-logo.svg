@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none" class="velora-logo">
+  <defs>
+    <linearGradient id="veloraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="veloraSparkle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Icon: Modern Stylized Shopping Bag & Gem -->
+  <g transform="translate(6, 6)">
+    <!-- Bag Body -->
+    <rect x="6" y="14" width="36" height="34" rx="10" fill="url(#veloraGrad)" />
+    <!-- Handle -->
+    <path d="M16 14V11C16 6.58 19.58 3 24 3C28.42 3 32 6.58 32 11V14" stroke="url(#veloraGrad)" stroke-width="4" stroke-linecap="round" fill="none" />
+    <!-- Sparkle/V Symbol inside bag -->
+    <path d="M19 26L24 35L29 26" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Small Star Glow -->
+    <circle cx="34" cy="22" r="2.5" fill="#FDE047" />
+  </g>
+
+  <!-- Brand Typography -->
+  <!-- "VELORA" -->
+  <text x="64" y="38" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.5" fill="currentColor" class="brand-text">
+    Velora
+  </text>
+  <!-- Dot Accent -->
+  <circle cx="166" cy="34" r="3.5" fill="#10B981" />
+  <!-- Subtitle "MARKET" -->
+  <text x="65" y="50" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-weight="600" font-size="9" letter-spacing="2.5" fill="#10B981">
+    PREMIUM STORE
+  </text>
+</svg>
