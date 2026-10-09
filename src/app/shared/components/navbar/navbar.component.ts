@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { AuthService } from './../../../core/auth/services/auth.service';
+import { Component, inject, Input } from '@angular/core';
 import { FlowbiteService } from '../../../core/services/flowbit.service';
 import { initFlowbite } from 'flowbite';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -14,9 +15,14 @@ export class NavbarComponent {
 
   constructor(private flowbiteService: FlowbiteService) {}
 
+  private readonly authService = inject(AuthService);
+
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();
     });
+  }
+  sigOut(): void {
+    this.authService.logOut();
   }
 }

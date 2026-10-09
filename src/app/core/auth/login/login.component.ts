@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { ToastService } from '../services/toast.service';
 import { CommonModule, NgClass } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly toast = inject(ToastService);
+  private readonly cookieService = inject(CookieService);
   toastMessage: string = '';
   toastType: 'success' | 'error' | 'info' = 'info';
 
@@ -87,8 +89,11 @@ export class LoginComponent implements OnInit {
             if (res.message === 'success') {
               this.showToast('Login successful 🎉', 'success');
 
-              // navigate to home path home
               this.msError = '';
+              // save token in local storage
+              this.cookieService.set('token', res.token);
+
+              // navigate to home path home
 
               setTimeout(() => {
                 this.router.navigate(['/home']);

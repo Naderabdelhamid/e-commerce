@@ -11,6 +11,8 @@ import { CategoriesComponent } from './features/categories/categories.component'
 import { DetailsComponent } from './features/details/details.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
 import { NotfoundDetailsComponent } from './features/notfound.details/notfound.details.component';
+import { authGuard } from './core/guards/auth-guard';
+import { isLoggedGuard } from './core/guards/is-logged-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +20,8 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
+    canActivate: [isLoggedGuard],
+
     children: [
       { path: 'login', component: LoginComponent, title: 'Login Page' },
       {
@@ -31,8 +35,13 @@ export const routes: Routes = [
   {
     path: '',
     component: BlankLayoutComponent,
+    canActivate: [authGuard],
     children: [
-      { path: 'home', component: HomeComponent, title: 'Home Page' },
+      {
+        path: 'home',
+        component: HomeComponent,
+        title: 'Home Page',
+      },
       { path: 'cart', component: CartComponent, title: 'Cart Page' },
       { path: 'products', component: ProductComponent, title: 'Products Page' },
       { path: 'brands', component: BrandsComponent, title: 'Brands Page' },
