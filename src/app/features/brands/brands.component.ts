@@ -5,9 +5,11 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-brands',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TransPipe],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css',
 })

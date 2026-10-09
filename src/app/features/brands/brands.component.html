@@ -1,25 +1,25 @@
 <section class="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   
   <!-- Header & Search -->
-  <div class="mb-10 text-center sm:text-left sm:flex sm:items-end sm:justify-between gap-6 pb-6 border-b border-slate-200">
+  <div class="mb-10 text-center sm:text-start sm:flex sm:items-end sm:justify-between gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
     <div>
-      <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mb-2">
-        Official Partners
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 mb-2">
+        {{ 'brandsPartners' | trans }}
       </span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Top Featured Brands</h1>
-      <p class="text-sm text-slate-500 mt-1">Explore authentic items from the world's leading brands</p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">{{ 'brandsTitle' | trans }}</h1>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ 'brandsSubtitle' | trans }}</p>
     </div>
 
     <!-- Search Input -->
     <div class="mt-4 sm:mt-0 w-full sm:w-72 relative">
-      <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+      <span class="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 text-slate-400">
         <i class="fas fa-search text-xs"></i>
       </span>
       <input
         type="text"
         [(ngModel)]="searchTerm"
-        placeholder="Filter brands..."
-        class="w-full pl-9 pr-4 py-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+        [placeholder]="'brandsFilterPlaceholder' | trans"
+        class="w-full pl-9 rtl:pl-4 rtl:pr-9 pr-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
       />
     </div>
   </div>
@@ -28,9 +28,9 @@
   @if (isLoading()) {
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
       @for (n of [1,2,3,4,5,6,7,8,9,10,11,12]; track n) {
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 flex flex-col items-center animate-pulse">
-          <div class="w-24 h-24 bg-slate-200 rounded-xl mb-4"></div>
-          <div class="h-4 bg-slate-200 rounded w-20"></div>
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 flex flex-col items-center animate-pulse">
+          <div class="w-24 h-24 bg-slate-200 dark:bg-slate-800 rounded-xl mb-4"></div>
+          <div class="h-4 bg-slate-200 dark:bg-slate-800 rounded w-20"></div>
         </div>
       }
     </div>
@@ -38,12 +38,12 @@
 
   <!-- Error State -->
   @else if (errorMessage()) {
-    <div class="text-center py-20 bg-white rounded-3xl border border-slate-100 p-8">
-      <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto mb-4">
+    <div class="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8">
+      <div class="w-16 h-16 rounded-2xl bg-rose-50 dark:bg-rose-950/50 text-rose-500 flex items-center justify-center mx-auto mb-4">
         <i class="fas fa-exclamation-triangle text-2xl"></i>
       </div>
-      <h3 class="text-lg font-bold text-slate-800">Something went wrong</h3>
-      <p class="text-sm text-slate-500 mt-1">{{ errorMessage() }}</p>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-white">Something went wrong</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ errorMessage() }}</p>
       <button (click)="loadBrands()" class="btn-primary mt-4 text-xs">
         Try Again
       </button>
@@ -52,12 +52,12 @@
 
   <!-- Empty State -->
   @else if (filteredBrands().length === 0) {
-    <div class="text-center py-20 bg-white rounded-3xl border border-slate-100 p-8">
-      <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+    <div class="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mx-auto mb-4">
         <i class="fas fa-tag text-2xl"></i>
       </div>
-      <h3 class="text-lg font-bold text-slate-800">No brands found</h3>
-      <p class="text-sm text-slate-500 mt-1">Try searching for a different brand name.</p>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-white">No brands found</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Try searching for a different brand name.</p>
     </div>
   }
 
@@ -67,10 +67,10 @@
       @for (brand of filteredBrands(); track brand._id) {
         <div
           (click)="openBrandDetails(brand)"
-          class="group bg-white rounded-2xl p-5 border border-slate-200/70 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-600/5 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer relative"
+          class="group bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/70 dark:border-slate-800 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-600/5 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer relative"
         >
           <!-- Brand Image Container -->
-          <div class="w-24 h-24 mb-3 flex items-center justify-center p-2 rounded-xl bg-slate-50 group-hover:bg-emerald-50/50 transition-colors">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center p-2 rounded-xl bg-slate-50 dark:bg-slate-800 group-hover:bg-emerald-50/50 dark:group-hover:bg-emerald-950/50 transition-colors">
             <img
               [src]="brand.image"
               [alt]="brand.name"
@@ -80,13 +80,13 @@
           </div>
 
           <!-- Brand Title -->
-          <h3 class="text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
+          <h3 class="text-sm font-bold text-slate-800 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
             {{ brand.name }}
           </h3>
 
           <!-- Subtext indicator -->
-          <span class="text-[11px] text-slate-400 mt-0.5 group-hover:text-emerald-600 font-medium transition-colors">
-            View Collection &rarr;
+          <span class="text-[11px] text-slate-400 mt-0.5 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 font-medium transition-colors">
+            {{ 'brandsViewCollection' | trans }} &rarr;
           </span>
         </div>
       }
@@ -95,22 +95,22 @@
 
   <!-- Quick View Brand Modal -->
   @if (selectedBrand(); as brand) {
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fadeIn">
-      <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 text-center relative">
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 text-center relative">
         <button
           (click)="closeBrandModal()"
-          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer transition-colors"
+          class="absolute top-4 right-4 rtl:right-auto rtl:left-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-300 flex items-center justify-center cursor-pointer transition-colors"
           aria-label="Close modal"
         >
           <i class="fas fa-times text-xs"></i>
         </button>
 
-        <div class="w-32 h-32 mx-auto mb-4 bg-slate-50 rounded-2xl p-4 flex items-center justify-center border border-slate-100">
+        <div class="w-32 h-32 mx-auto mb-4 bg-slate-50 dark:bg-slate-800 rounded-2xl p-4 flex items-center justify-center border border-slate-100 dark:border-slate-700">
           <img [src]="brand.image" [alt]="brand.name" class="max-h-full max-w-full object-contain" />
         </div>
 
-        <h3 class="text-xl font-bold text-slate-900 mb-1">{{ brand.name }}</h3>
-        <p class="text-xs text-slate-500 mb-6">Discover all genuine products manufactured by {{ brand.name }}.</p>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">{{ brand.name }}</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Discover all genuine products manufactured by {{ brand.name }}.</p>
 
         <div class="flex gap-3">
           <button
@@ -123,7 +123,7 @@
             (click)="viewBrandProducts(brand._id)"
             class="btn-primary flex-1 text-xs py-2.5"
           >
-            Explore Items
+            {{ 'brandsExploreItems' | trans }}
           </button>
         </div>
       </div>

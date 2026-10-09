@@ -5,9 +5,11 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { WishlistService } from './services/wishlist.service';
 import { RouterLink } from '@angular/router';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-wishlist',
-  imports: [CardComponent, RouterLink],
+  imports: [CardComponent, RouterLink, TransPipe],
   templateUrl: './wishlist.component.html',
 })
 export class WishlistComponent implements OnInit {

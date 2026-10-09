@@ -1,38 +1,38 @@
 <section class="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   
   <!-- Header -->
-  <div class="mb-8 pb-4 border-b border-slate-200">
-    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mb-2">
-      Final Step
+  <div class="mb-8 pb-4 border-b border-slate-200 dark:border-slate-800">
+    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 mb-2">
+      {{ 'checkoutFinalStep' | trans }}
     </span>
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Checkout</h1>
-    <p class="text-sm text-slate-500 mt-1">Provide your delivery address and choose your payment method</p>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">{{ 'checkoutTitle' | trans }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ 'checkoutSubtitle' | trans }}</p>
   </div>
 
   <!-- Loading State -->
   @if (isLoading) {
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <div class="lg:col-span-8 bg-white p-8 rounded-3xl border border-slate-100 animate-pulse space-y-4">
-        <div class="h-6 bg-slate-200 rounded w-1/4"></div>
-        <div class="h-12 bg-slate-100 rounded-xl"></div>
-        <div class="h-12 bg-slate-100 rounded-xl"></div>
-        <div class="h-12 bg-slate-100 rounded-xl"></div>
+      <div class="lg:col-span-8 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 animate-pulse space-y-4">
+        <div class="h-6 bg-slate-200 dark:bg-slate-800 rounded w-1/4"></div>
+        <div class="h-12 bg-slate-100 dark:bg-slate-800 rounded-xl"></div>
+        <div class="h-12 bg-slate-100 dark:bg-slate-800 rounded-xl"></div>
+        <div class="h-12 bg-slate-100 dark:bg-slate-800 rounded-xl"></div>
       </div>
-      <div class="lg:col-span-4 bg-white p-8 rounded-3xl border border-slate-100 animate-pulse space-y-4">
-        <div class="h-6 bg-slate-200 rounded w-1/2"></div>
-        <div class="h-24 bg-slate-100 rounded-xl"></div>
+      <div class="lg:col-span-4 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 animate-pulse space-y-4">
+        <div class="h-6 bg-slate-200 dark:bg-slate-800 rounded w-1/2"></div>
+        <div class="h-24 bg-slate-100 dark:bg-slate-800 rounded-xl"></div>
       </div>
     </div>
   }
 
   <!-- Error State -->
   @else if (hasError) {
-    <div class="text-center py-20 bg-white rounded-3xl border border-slate-100 p-8 max-w-md mx-auto">
-      <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto mb-4">
+    <div class="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8 max-w-md mx-auto">
+      <div class="w-16 h-16 rounded-2xl bg-rose-50 dark:bg-rose-950/50 text-rose-500 flex items-center justify-center mx-auto mb-4">
         <i class="fas fa-exclamation-triangle text-2xl"></i>
       </div>
-      <h3 class="text-lg font-bold text-slate-800">Checkout Error</h3>
-      <p class="text-sm text-slate-500 mt-1">{{ errorMessage }}</p>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-white">Checkout Error</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ errorMessage }}</p>
       <button (click)="loadCart()" class="btn-primary mt-4 text-xs">
         Try Again
       </button>
@@ -41,14 +41,14 @@
 
   <!-- Empty Cart -->
   @else if (isEmpty) {
-    <div class="text-center py-20 bg-white rounded-3xl border border-slate-100 p-8 max-w-md mx-auto">
-      <div class="w-20 h-20 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+    <div class="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8 max-w-md mx-auto">
+      <div class="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mx-auto mb-4">
         <i class="fas fa-shopping-cart text-3xl"></i>
       </div>
-      <h2 class="text-2xl font-bold text-slate-800 mb-2">Your cart is empty</h2>
-      <p class="text-sm text-slate-500 mb-6">Add products to your cart before proceeding to checkout.</p>
+      <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">{{ 'cartEmptyTitle' | trans }}</h2>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">{{ 'cartEmptyDesc' | trans }}</p>
       <a routerLink="/products" class="btn-primary text-xs !py-3 !px-6">
-        Explore Products
+        {{ 'cartStartShopping' | trans }}
       </a>
     </div>
   }
@@ -62,19 +62,19 @@
         
         <!-- Saved Addresses (if available) -->
         @if (savedAddresses.length > 0) {
-          <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
-            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Quick Pick: Saved Addresses</h3>
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-3">
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">{{ 'checkoutSavedAddr' | trans }}</h3>
             <div class="grid sm:grid-cols-2 gap-3">
               @for (addr of savedAddresses; track addr._id) {
                 <div
                   (click)="selectSavedAddress(addr)"
-                  class="p-3.5 rounded-2xl border border-slate-200 hover:border-emerald-500 bg-slate-50 hover:bg-emerald-50/40 cursor-pointer transition-all space-y-1"
+                  class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 bg-slate-50 dark:bg-slate-800 hover:bg-emerald-50/40 dark:hover:bg-emerald-950/40 cursor-pointer transition-all space-y-1"
                 >
                   <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-800">{{ addr.name || 'Home' }}</span>
+                    <span class="text-xs font-bold text-slate-800 dark:text-slate-200">{{ addr.name || 'Home' }}</span>
                     <i class="fas fa-check-circle text-xs text-emerald-600"></i>
                   </div>
-                  <p class="text-xs text-slate-500 truncate">{{ addr.details }}, {{ addr.city }}</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 truncate">{{ addr.details }}, {{ addr.city }}</p>
                   <p class="text-[11px] text-slate-400">{{ addr.phone }}</p>
                 </div>
               }
@@ -83,20 +83,20 @@
         }
 
         <!-- Shipping Address Form -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs space-y-6">
-          <div class="flex items-center gap-3 pb-3 border-b border-slate-100">
-            <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">
+        <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6">
+          <div class="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div class="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs">
               1
             </div>
-            <h3 class="text-lg font-bold text-slate-900">Shipping Information</h3>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{{ 'checkoutShippingInfo' | trans }}</h3>
           </div>
 
           <form [formGroup]="checkoutForm" class="space-y-4">
             <!-- City -->
             <div>
-              <label for="city" class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">City / Governorate</label>
+              <label for="city" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase mb-1.5">{{ 'checkoutCity' | trans }}</label>
               <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                <span class="absolute left-4 rtl:left-auto rtl:right-4 top-1/2 -translate-y-1/2 text-slate-400">
                   <i class="fas fa-city text-sm"></i>
                 </span>
                 <input
@@ -104,7 +104,7 @@
                   type="text"
                   formControlName="city"
                   placeholder="e.g. Cairo, Giza, Alexandria"
-                  class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                  class="w-full pl-11 rtl:pl-4 pr-4 rtl:pr-11 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
                 />
               </div>
               @if (checkoutForm.get('city')?.touched && checkoutForm.get('city')?.invalid) {
@@ -114,9 +114,9 @@
 
             <!-- Details -->
             <div>
-              <label for="details" class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Detailed Address / Street</label>
+              <label for="details" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase mb-1.5">{{ 'checkoutAddressDetails' | trans }}</label>
               <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                <span class="absolute left-4 rtl:left-auto rtl:right-4 top-1/2 -translate-y-1/2 text-slate-400">
                   <i class="fas fa-location-dot text-sm"></i>
                 </span>
                 <input
@@ -124,7 +124,7 @@
                   type="text"
                   formControlName="details"
                   placeholder="Building No, Street Name, Apartment No"
-                  class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                  class="w-full pl-11 rtl:pl-4 pr-4 rtl:pr-11 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
                 />
               </div>
               @if (checkoutForm.get('details')?.touched && checkoutForm.get('details')?.invalid) {
@@ -134,9 +134,9 @@
 
             <!-- Phone -->
             <div>
-              <label for="phone" class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Contact Phone Number</label>
+              <label for="phone" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase mb-1.5">{{ 'checkoutPhone' | trans }}</label>
               <div class="relative">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                <span class="absolute left-4 rtl:left-auto rtl:right-4 top-1/2 -translate-y-1/2 text-slate-400">
                   <i class="fas fa-phone text-sm"></i>
                 </span>
                 <input
@@ -144,7 +144,7 @@
                   type="tel"
                   formControlName="phone"
                   placeholder="01012345678"
-                  class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                  class="w-full pl-11 rtl:pl-4 pr-4 rtl:pr-11 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
                 />
               </div>
               @if (checkoutForm.get('phone')?.touched && checkoutForm.get('phone')?.invalid) {
@@ -155,54 +155,54 @@
         </div>
 
         <!-- Payment Method Selection -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs space-y-6">
-          <div class="flex items-center gap-3 pb-3 border-b border-slate-100">
-            <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">
+        <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6">
+          <div class="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div class="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs">
               2
             </div>
-            <h3 class="text-lg font-bold text-slate-900">Payment Option</h3>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{{ 'checkoutPaymentOption' | trans }}</h3>
           </div>
 
           <div class="grid sm:grid-cols-2 gap-4">
             <!-- Cash on Delivery -->
             <label
               (click)="setPaymentMethod('cash')"
-              [class]="selectedPaymentMethod === 'cash' ? 'border-emerald-600 bg-emerald-50/40 ring-2 ring-emerald-500/20' : 'border-slate-200 hover:border-slate-300 bg-white'"
+              [class]="selectedPaymentMethod === 'cash' ? 'border-emerald-600 bg-emerald-50/40 dark:bg-emerald-950/30 ring-2 ring-emerald-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-white dark:bg-slate-800'"
               class="p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between space-y-3"
             >
               <div class="flex items-center justify-between">
                 <i class="fas fa-money-bill-wave text-2xl text-emerald-600"></i>
-                <div [class]="selectedPaymentMethod === 'cash' ? 'w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px]' : 'w-5 h-5 rounded-full border-2 border-slate-300'">
+                <div [class]="selectedPaymentMethod === 'cash' ? 'w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px]' : 'w-5 h-5 rounded-full border-2 border-slate-300 dark:border-slate-600'">
                   @if (selectedPaymentMethod === 'cash') {
                     <i class="fas fa-check"></i>
                   }
                 </div>
               </div>
               <div>
-                <h4 class="text-sm font-bold text-slate-800">Cash on Delivery</h4>
-                <p class="text-xs text-slate-500 mt-0.5">Pay with cash upon package receipt.</p>
+                <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100">{{ 'checkoutCashOnDeliv' | trans }}</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{{ 'checkoutCashDesc' | trans }}</p>
               </div>
             </label>
 
             <!-- Card / Stripe Payment -->
             <label
               (click)="setPaymentMethod('card')"
-              [class]="selectedPaymentMethod === 'card' ? 'border-emerald-600 bg-emerald-50/40 ring-2 ring-emerald-500/20' : 'border-slate-200 hover:border-slate-300 bg-white'"
+              [class]="selectedPaymentMethod === 'card' ? 'border-emerald-600 bg-emerald-50/40 dark:bg-emerald-950/30 ring-2 ring-emerald-500/20' : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-white dark:bg-slate-800'"
               class="p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between space-y-3"
             >
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5">
                   <i class="fas fa-credit-card text-2xl text-blue-600"></i>
                 </div>
-                <div [class]="selectedPaymentMethod === 'card' ? 'w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px]' : 'w-5 h-5 rounded-full border-2 border-slate-300'">
+                <div [class]="selectedPaymentMethod === 'card' ? 'w-5 h-5 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[10px]' : 'w-5 h-5 rounded-full border-2 border-slate-300 dark:border-slate-600'">
                   @if (selectedPaymentMethod === 'card') {
                     <i class="fas fa-check"></i>
                   }
                 </div>
               </div>
               <div>
-                <h4 class="text-sm font-bold text-slate-800">Credit / Debit Card</h4>
-                <p class="text-xs text-slate-500 mt-0.5">Secure payment via Visa / Mastercard / Stripe.</p>
+                <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100">{{ 'checkoutCardPay' | trans }}</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{{ 'checkoutCardDesc' | trans }}</p>
               </div>
             </label>
           </div>
@@ -215,50 +215,50 @@
       </div>
 
       <!-- Right: Order Review Sidebar (5 cols) -->
-      <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs space-y-6">
-        <h3 class="text-xl font-bold text-slate-900 pb-3 border-b border-slate-100">
-          Order Summary ({{ cartDetials?.products?.length || 0 }} Items)
+      <div class="lg:col-span-5 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-6">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white pb-3 border-b border-slate-100 dark:border-slate-800">
+          {{ 'cartOrderSummary' | trans }} ({{ cartDetials?.products?.length || 0 }})
         </h3>
 
         <!-- Items Preview -->
-        <div class="max-h-60 overflow-y-auto divide-y divide-slate-100 pr-2">
+        <div class="max-h-60 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800 pr-2">
           @for (item of cartDetials?.products; track item.product._id) {
             <div class="py-3 flex items-center justify-between gap-3">
               <div class="flex items-center gap-3">
                 <img
                   [src]="item.product.imageCover"
                   [alt]="item.product.title"
-                  class="w-12 h-12 rounded-xl object-contain bg-slate-50 border border-slate-100 p-1"
+                  class="w-12 h-12 rounded-xl object-contain bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-1"
                 />
                 <div>
-                  <h5 class="text-xs font-bold text-slate-800 line-clamp-1 max-w-[170px]">{{ item.product.title }}</h5>
-                  <p class="text-[11px] text-slate-400">Qty: {{ item.count }} × {{ item.price }} EGP</p>
+                  <h5 class="text-xs font-bold text-slate-800 dark:text-slate-150 line-clamp-1 max-w-[170px]">{{ item.product.title }}</h5>
+                  <p class="text-[11px] text-slate-400">{{ 'ordersQuantity' | trans }}: {{ item.count }} × {{ item.price }} {{ 'cardEgp' | trans }}</p>
                 </div>
               </div>
-              <span class="text-xs font-bold text-slate-800">{{ item.price * item.count }} EGP</span>
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">{{ item.price * item.count }} {{ 'cardEgp' | trans }}</span>
             </div>
           }
         </div>
 
         <!-- Price Breakdown -->
-        <div class="space-y-3 pt-3 border-t border-slate-100 text-sm text-slate-600">
+        <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-sm text-slate-600 dark:text-slate-400">
           <div class="flex justify-between">
-            <span>Subtotal</span>
-            <span class="font-bold text-slate-800">{{ cartDetials?.totalCartPrice }} EGP</span>
+            <span>{{ 'cartSubtotal' | trans }}</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">{{ cartDetials?.totalCartPrice }} {{ 'cardEgp' | trans }}</span>
           </div>
 
           <div class="flex justify-between">
-            <span>Shipping</span>
-            <span class="text-emerald-600 font-bold">Free</span>
+            <span>{{ 'cartDelivery' | trans }}</span>
+            <span class="text-emerald-600 dark:text-emerald-400 font-bold">{{ 'cartFree' | trans }}</span>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 flex justify-between items-baseline text-slate-900">
-            <span class="text-base font-bold">Total to Pay</span>
+          <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-baseline text-slate-900 dark:text-white">
+            <span class="text-base font-bold">{{ 'cartTotal' | trans }}</span>
             <div class="text-right">
-              <span class="text-2xl font-extrabold text-emerald-700">
+              <span class="text-2xl font-extrabold text-emerald-700 dark:text-emerald-400">
                 {{ cartDetials?.totalCartPrice }}
               </span>
-              <span class="text-xs font-bold text-slate-500 ml-1">EGP</span>
+              <span class="text-xs font-bold text-slate-500 dark:text-slate-400 ml-1">{{ 'cardEgp' | trans }}</span>
             </div>
           </div>
         </div>
@@ -271,16 +271,16 @@
           class="btn-primary w-full py-4 text-sm"
         >
           @if (isPlacingOrder) {
-            <i class="fas fa-spinner fa-spin mr-2"></i> Processing Order...
+            <i class="fas fa-spinner fa-spin mr-2 rtl:mr-0 rtl:ml-2"></i> Processing Order...
           } @else if (selectedPaymentMethod === 'cash') {
-            <i class="fas fa-check-circle mr-2"></i> Confirm Cash Order
+            <i class="fas fa-check-circle mr-2 rtl:mr-0 rtl:ml-2"></i> {{ 'checkoutConfirmCash' | trans }}
           } @else {
-            <i class="fas fa-credit-card mr-2"></i> Proceed to Card Payment
+            <i class="fas fa-credit-card mr-2 rtl:mr-0 rtl:ml-2"></i> {{ 'checkoutProceedCard' | trans }}
           }
         </button>
 
         <p class="text-center text-[11px] text-slate-400">
-          By placing your order, you agree to FreshCart's Conditions of Use and Privacy Notice.
+          By placing your order, you agree to Velora's Conditions of Use and Privacy Notice.
         </p>
 
       </div>

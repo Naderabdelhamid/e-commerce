@@ -5,9 +5,11 @@ import { UserOrder } from '../checkout/models/order.interface';
 import { RouterLink } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-orders',
-  imports: [CommonModule, RouterLink, DatePipe],
+  imports: [CommonModule, RouterLink, DatePipe, TransPipe],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })

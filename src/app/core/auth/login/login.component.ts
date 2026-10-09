@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         if (res.message === 'success' || res.token) {
           this.cookieService.set('token', res.token);
           this.authService.syncUser();
-          this.toastr.success('Welcome back to FreshCart!', 'Login Successful');
+          this.toastr.success('Welcome back to Velora!', 'Login Successful');
           this.router.navigate(['/home']);
         }
       },

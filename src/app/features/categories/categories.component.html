@@ -1,21 +1,21 @@
 <section class="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
   
   <!-- Header -->
-  <div class="mb-10 text-center sm:text-left pb-6 border-b border-slate-200">
-    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mb-2">
-      Curated Collections
+  <div class="mb-10 text-center sm:text-start pb-6 border-b border-slate-200 dark:border-slate-800">
+    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 mb-2">
+      {{ 'catCurated' | trans }}
     </span>
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Explore Categories</h1>
-    <p class="text-sm text-slate-500 mt-1">Browse through our vast catalog organized by categories and departments</p>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">{{ 'catTitle' | trans }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ 'catSubtitle' | trans }}</p>
   </div>
 
   <!-- Loading State -->
   @if (isLoading()) {
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       @for (n of [1,2,3,4,5,6,7,8]; track n) {
-        <div class="bg-white rounded-3xl p-4 border border-slate-100 animate-pulse">
-          <div class="h-48 bg-slate-200 rounded-2xl mb-4"></div>
-          <div class="h-5 bg-slate-200 rounded w-1/2 mx-auto"></div>
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 border border-slate-100 dark:border-slate-800 animate-pulse">
+          <div class="h-48 bg-slate-200 dark:bg-slate-800 rounded-2xl mb-4"></div>
+          <div class="h-5 bg-slate-200 dark:bg-slate-800 rounded w-1/2 mx-auto"></div>
         </div>
       }
     </div>
@@ -23,12 +23,12 @@
 
   <!-- Error State -->
   @else if (errorMessage()) {
-    <div class="text-center py-20 bg-white rounded-3xl border border-slate-100 p-8">
-      <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto mb-4">
+    <div class="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8">
+      <div class="w-16 h-16 rounded-2xl bg-rose-50 dark:bg-rose-950/50 text-rose-500 flex items-center justify-center mx-auto mb-4">
         <i class="fas fa-exclamation-triangle text-2xl"></i>
       </div>
-      <h3 class="text-lg font-bold text-slate-800">Something went wrong</h3>
-      <p class="text-sm text-slate-500 mt-1">{{ errorMessage() }}</p>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-white">Something went wrong</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ errorMessage() }}</p>
       <button (click)="loadCategories()" class="btn-primary mt-4 text-xs">
         Try Again
       </button>
@@ -41,19 +41,19 @@
       @for (category of categories(); track category._id) {
         <div
           (click)="selectCategory(category)"
-          class="group bg-white rounded-3xl border border-slate-200/80 hover:border-emerald-500/50 shadow-xs hover:shadow-xl hover:shadow-emerald-600/5 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
+          class="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 hover:border-emerald-500/50 shadow-xs hover:shadow-xl hover:shadow-emerald-600/5 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
         >
           <!-- Image Box with Aspect Ratio -->
-          <div class="h-52 w-full bg-slate-50 overflow-hidden relative">
+          <div class="h-52 w-full bg-slate-50 dark:bg-slate-800 overflow-hidden relative">
             <img
               [src]="category.image"
               [alt]="category.name"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
               <span class="text-xs text-white font-semibold flex items-center gap-1.5">
-                <i class="fas fa-layer-group"></i> View Subcategories
+                <i class="fas fa-layer-group"></i> {{ 'catViewSubcategories' | trans }}
               </span>
             </div>
           </div>
@@ -61,14 +61,14 @@
           <!-- Content -->
           <div class="p-5 flex items-center justify-between">
             <div>
-              <h3 class="text-base font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
+              <h3 class="text-base font-bold text-slate-800 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
                 {{ category.name }}
               </h3>
               <p class="text-xs text-slate-400 mt-0.5">Click to view items</p>
             </div>
             
-            <div class="w-9 h-9 rounded-full bg-slate-50 group-hover:bg-emerald-50 text-slate-400 group-hover:text-emerald-600 flex items-center justify-center transition-colors">
-              <i class="fas fa-arrow-right text-xs"></i>
+            <div class="w-9 h-9 rounded-full bg-slate-50 dark:bg-slate-800 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-950/60 text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 flex items-center justify-center transition-colors">
+              <i class="fas fa-arrow-right rtl:rotate-180 text-xs"></i>
             </div>
           </div>
         </div>
@@ -78,22 +78,22 @@
 
   <!-- Subcategories Modal / Drawer -->
   @if (selectedCategory(); as cat) {
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-fadeIn">
-      <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative max-h-[85vh] flex flex-col">
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 dark:border-slate-800 relative max-h-[85vh] flex flex-col">
         
         <!-- Header -->
-        <div class="flex items-start justify-between pb-4 border-b border-slate-100 mb-6">
+        <div class="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-6">
           <div class="flex items-center gap-4">
-            <img [src]="cat.image" [alt]="cat.name" class="w-14 h-14 rounded-2xl object-cover border border-slate-100" />
+            <img [src]="cat.image" [alt]="cat.name" class="w-14 h-14 rounded-2xl object-cover border border-slate-100 dark:border-slate-700" />
             <div>
-              <h3 class="text-xl font-bold text-slate-900">{{ cat.name }}</h3>
-              <p class="text-xs text-slate-500">Subcategories & Special Collections</p>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ cat.name }}</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Subcategories & Special Collections</p>
             </div>
           </div>
 
           <button
             (click)="closeSubcategories()"
-            class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer transition-colors"
+            class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-300 flex items-center justify-center cursor-pointer transition-colors"
           >
             <i class="fas fa-times text-xs"></i>
           </button>
@@ -108,13 +108,13 @@
             </div>
           } @else if (subcategories().length === 0) {
             <div class="text-center py-8">
-              <p class="text-sm text-slate-500">No subcategories listed for this category.</p>
+              <p class="text-sm text-slate-500 dark:text-slate-400">No subcategories listed for this category.</p>
             </div>
           } @else {
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
               @for (sub of subcategories(); track sub._id) {
-                <div class="p-3 bg-slate-50 hover:bg-emerald-50/70 border border-slate-100 hover:border-emerald-200 rounded-xl text-center transition-all cursor-default">
-                  <span class="text-xs font-semibold text-slate-700">{{ sub.name }}</span>
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/50 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-700 rounded-xl text-center transition-all cursor-default">
+                  <span class="text-xs font-semibold text-slate-700 dark:text-slate-200">{{ sub.name }}</span>
                 </div>
               }
             </div>
@@ -122,7 +122,7 @@
         </div>
 
         <!-- Actions -->
-        <div class="mt-6 pt-4 border-t border-slate-100 flex gap-3">
+        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex gap-3">
           <button
             (click)="closeSubcategories()"
             class="btn-secondary flex-1 text-xs py-3"
@@ -133,8 +133,8 @@
             (click)="navigateToCategoryProducts(cat._id)"
             class="btn-primary flex-1 text-xs py-3"
           >
-            <i class="fas fa-boxes-stacked mr-1.5"></i>
-            Browse All Products
+            <i class="fas fa-boxes-stacked mr-1.5 rtl:mr-0 rtl:ml-1.5"></i>
+            {{ 'catBrowseAll' | trans }}
           </button>
         </div>
 

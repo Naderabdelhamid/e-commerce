@@ -18,7 +18,7 @@ export const routes: Routes = [
           import('./core/auth/login/login.component').then(
             (m) => m.LoginComponent
           ),
-        title: 'Login - FreshCart',
+        title: 'Login - Velora',
       },
       {
         path: 'register',
@@ -26,7 +26,7 @@ export const routes: Routes = [
           import('./core/auth/register/register.component').then(
             (m) => m.RegisterComponent
           ),
-        title: 'Register - FreshCart',
+        title: 'Register - Velora',
       },
       {
         path: 'forgot-password',
@@ -34,7 +34,7 @@ export const routes: Routes = [
           import(
             './core/auth/forgot-password/forgot-password.component'
           ).then((m) => m.ForgotPasswordComponent),
-        title: 'Forgot Password - FreshCart',
+        title: 'Forgot Password - Velora',
       },
     ],
   },
@@ -48,13 +48,13 @@ export const routes: Routes = [
         path: 'home',
         loadComponent: () =>
           import('./features/home/home.component').then((m) => m.HomeComponent),
-        title: 'Home - FreshCart',
+        title: 'Home - Velora',
       },
       {
         path: 'cart',
         loadComponent: () =>
           import('./features/cart/cart.component').then((m) => m.CartComponent),
-        title: 'Cart - FreshCart',
+        title: 'Cart - Velora',
       },
       {
         path: 'wishlist',
@@ -62,7 +62,7 @@ export const routes: Routes = [
           import('./features/wishlist/wishlist.component').then(
             (m) => m.WishlistComponent
           ),
-        title: 'Wishlist - FreshCart',
+        title: 'Wishlist - Velora',
       },
       {
         path: 'products',
@@ -70,7 +70,7 @@ export const routes: Routes = [
           import('./features/product/product.component').then(
             (m) => m.ProductComponent
           ),
-        title: 'Products - FreshCart',
+        title: 'Products - Velora',
       },
       {
         path: 'brands',
@@ -78,7 +78,7 @@ export const routes: Routes = [
           import('./features/brands/brands.component').then(
             (m) => m.BrandsComponent
           ),
-        title: 'Brands - FreshCart',
+        title: 'Brands - Velora',
       },
       {
         path: 'categories',
@@ -86,7 +86,7 @@ export const routes: Routes = [
           import('./features/categories/categories.component').then(
             (m) => m.CategoriesComponent
           ),
-        title: 'Categories - FreshCart',
+        title: 'Categories - Velora',
       },
       {
         path: 'details/:slug/:id',
@@ -94,7 +94,7 @@ export const routes: Routes = [
           import('./features/details/details.component').then(
             (m) => m.DetailsComponent
           ),
-        title: 'Product Details - FreshCart',
+        title: 'Product Details - Velora',
       },
       {
         path: 'checkout',
@@ -102,7 +102,7 @@ export const routes: Routes = [
           import('./features/checkout/checkout.component').then(
             (m) => m.CheckoutComponent
           ),
-        title: 'Checkout - FreshCart',
+        title: 'Checkout - Velora',
       },
       {
         path: 'allorders',
@@ -110,7 +110,7 @@ export const routes: Routes = [
           import('./features/orders/orders.component').then(
             (m) => m.OrdersComponent
           ),
-        title: 'My Orders - FreshCart',
+        title: 'My Orders - Velora',
       },
     ],
   },
@@ -121,6 +121,6 @@ export const routes: Routes = [
       import(
         './features/notfound.details/notfound.details.component'
       ).then((m) => m.NotfoundDetailsComponent),
-    title: '404 Not Found - FreshCart',
+    title: '404 Not Found - Velora',
   },
 ];

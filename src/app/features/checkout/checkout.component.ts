@@ -17,9 +17,11 @@ import { CreateCashOrderRequest } from './models/order.interface';
 import { UserAddress } from '../../core/models/address.interface';
 import { CommonModule } from '@angular/common';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, TransPipe],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })

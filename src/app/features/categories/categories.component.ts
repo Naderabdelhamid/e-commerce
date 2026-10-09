@@ -4,9 +4,11 @@ import { Category, SubCategory } from '../../core/models/category.interface';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+import { TransPipe } from '../../shared/pipes/trans.pipe';
+
 @Component({
   selector: 'app-categories',
-  imports: [CommonModule],
+  imports: [CommonModule, TransPipe],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css',
 })
