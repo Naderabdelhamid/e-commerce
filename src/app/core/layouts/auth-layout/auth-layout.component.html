@@ -1,11 +1,74 @@
-<div class="min-h-screen flex flex-col bg-white dark:bg-[#030712] transition-colors duration-300">
-  <!-- Minimal Auth Navbar -->
-  <header>
-    <app-navbar [isLogin]="false"></app-navbar>
-  </header>
+<div class="auth-split-layout">
 
-  <!-- Auth Content Container -->
-  <main class="flex-1 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-    <router-outlet></router-outlet>
+  <!-- ═══════════════════════════════════════════════
+       LEFT PANEL — Hero Image with Overlaid Content
+       ═══════════════════════════════════════════════ -->
+  <aside class="auth-panel-left">
+    <!-- Background Image -->
+    <div class="auth-panel-image"></div>
+    <!-- Dark overlay gradient -->
+    <div class="auth-panel-overlay"></div>
+
+    <!-- Content on top of image -->
+    <div class="auth-panel-content">
+      <!-- Brand Logo -->
+      <a routerLink="/home" class="auth-logo-link">
+        <img src="/images/velora-logo-dark.svg" alt="Velora" class="auth-logo-img" />
+      </a>
+
+      <!-- Tagline Section -->
+      <div class="auth-tagline">
+        <div class="auth-tagline-badge">
+          <i class="fas fa-star text-amber-400 text-xs"></i>
+          <span>Premium Shopping Experience</span>
+        </div>
+        <h2 class="auth-tagline-title">
+          Discover the world's finest products, curated just for you.
+        </h2>
+        <p class="auth-tagline-sub">
+          Thousands of premium items, delivered to your door.
+        </p>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="auth-trust-badges">
+        <div class="auth-trust-item">
+          <i class="fas fa-shield-halved"></i>
+          <span>Secure Payments</span>
+        </div>
+        <div class="auth-trust-item">
+          <i class="fas fa-truck-fast"></i>
+          <span>Free Delivery</span>
+        </div>
+        <div class="auth-trust-item">
+          <i class="fas fa-rotate-left"></i>
+          <span>Easy Returns</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════
+       RIGHT PANEL — Form Area
+       ═══════════════════════════════════════════════ -->
+  <main class="auth-panel-right">
+    <!-- Top bar with back to home + theme toggle -->
+    <div class="auth-topbar">
+      <a routerLink="/home" class="auth-back-link">
+        <i class="fas fa-arrow-left text-xs"></i>
+        <span>Back to store</span>
+      </a>
+      <div class="auth-topbar-right">
+        <button (click)="toggleTheme()" class="auth-theme-btn" [title]="isDarkMode() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+          <i [class]="isDarkMode() ? 'fas fa-sun text-amber-400' : 'fas fa-moon text-slate-500'"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scrollable form content -->
+    <div class="auth-form-scroll">
+      <router-outlet></router-outlet>
+    </div>
   </main>
+
 </div>

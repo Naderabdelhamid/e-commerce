@@ -34,9 +34,6 @@ html {
 }
 
 body {
-  // Use light color scheme
-  color-scheme: light;
-
   // Use our CSS variable which we've overridden above
   background-color: #ffffff;
   color: #0f172a;
@@ -44,4 +41,14 @@ body {
 
   // Reset the user agent margin.
   margin: 0;
+}
+
+// Light mode: force light color-scheme
+html:not(.dark) {
+  color-scheme: light;
+}
+
+// Dark mode: force dark color-scheme
+html.dark {
+  color-scheme: dark;
 }
