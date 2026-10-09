@@ -15,19 +15,31 @@ html {
     typography: Roboto,
     density: 0,
   ));
+
+  // Override Material surface to pure white (light mode)
+  --mat-sys-surface: #ffffff;
+  --mat-sys-surface-variant: #f8fafc;
+  --mat-sys-background: #ffffff;
+  --mat-sys-on-surface: #0f172a;
+  --mat-sys-on-background: #0f172a;
+}
+
+// Dark mode Material overrides
+.dark {
+  --mat-sys-surface: #0d1117;
+  --mat-sys-surface-variant: #161b27;
+  --mat-sys-background: #030712;
+  --mat-sys-on-surface: #e2e8f0;
+  --mat-sys-on-background: #e2e8f0;
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
+  // Use light color scheme
   color-scheme: light;
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  // Use our CSS variable which we've overridden above
+  background-color: #ffffff;
+  color: #0f172a;
   font: var(--mat-sys-body-medium);
 
   // Reset the user agent margin.

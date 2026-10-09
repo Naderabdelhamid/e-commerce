@@ -8,6 +8,9 @@
   margin-inline: auto;
 }
 
+/* ============================================
+   DESIGN TOKENS - Light Mode (Default)
+   ============================================ */
 :root {
   --primary: #059669;
   --primary-hover: #047857;
@@ -15,23 +18,62 @@
   --primary-ring: rgba(5, 150, 105, 0.2);
   --accent: #f59e0b;
   --danger: #ef4444;
+
+  /* Light Mode Surfaces */
   --surface: #ffffff;
   --surface-muted: #f8fafc;
+  --surface-elevated: #ffffff;
+  --surface-overlay: rgba(255, 255, 255, 0.97);
+
+  /* Light Mode Text */
   --text-main: #0f172a;
   --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+
+  /* Light Mode Borders */
   --border-color: #e2e8f0;
+  --border-muted: #f1f5f9;
+
+  /* Navbar */
+  --navbar-bg: rgba(255, 255, 255, 0.97);
+  --navbar-border: rgba(226, 232, 240, 0.8);
+
   --main-color: #059669;
 }
 
+/* ============================================
+   DESIGN TOKENS - Dark Mode
+   ============================================ */
 .dark {
-  --surface: #0f172a;
-  --surface-muted: #1e293b;
-  --text-main: #f8fafc;
+  /* Dark Mode Surfaces - Truly dark */
+  --surface: #0d1117;
+  --surface-muted: #161b27;
+  --surface-elevated: #1c2333;
+  --surface-overlay: rgba(13, 17, 23, 0.98);
+
+  /* Dark Mode Text */
+  --text-main: #e2e8f0;
   --text-muted: #94a3b8;
-  --border-color: #334155;
+  --text-subtle: #64748b;
+
+  /* Dark Mode Borders */
+  --border-color: #21262d;
+  --border-muted: #1c2333;
+
+  /* Navbar */
+  --navbar-bg: rgba(13, 17, 23, 0.98);
+  --navbar-border: rgba(33, 38, 45, 0.9);
+
+  /* Primary adjusted for dark */
+  --primary-light: rgba(5, 150, 105, 0.12);
+  --primary-ring: rgba(5, 150, 105, 0.25);
+
   color-scheme: dark;
 }
 
+/* ============================================
+   HTML & BODY BASE
+   ============================================ */
 html {
   scroll-behavior: smooth;
   height: 100%;
@@ -44,6 +86,7 @@ body {
   color: var(--text-main);
   background-color: #f8fafc;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Arabic Font Support */
@@ -52,61 +95,85 @@ body {
   font-family: 'Cairo', 'Plus Jakarta Sans', -apple-system, sans-serif !important;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-.dark ::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #334155;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+/* ============================================
+   LIGHT MODE - Clean & White
+   ============================================ */
+
+/* Light mode body: pure white */
+body {
+  background-color: #ffffff !important;
+  color: #0f172a;
 }
 
-/* Dark Mode Overrides for Surfaces & Components */
+/* ============================================
+   DARK MODE OVERRIDES - Deep & Rich Dark
+   ============================================ */
+
+/* Dark mode body: near-black deep dark */
 .dark body {
-  background-color: #020617;
-  color: #f8fafc;
+  background-color: #030712 !important;
+  color: #e2e8f0;
 }
 
-.dark .card,
-.dark .card-modern,
+/* Dark mode navbar */
+.dark nav {
+  background-color: var(--navbar-bg) !important;
+  border-color: var(--navbar-border) !important;
+}
+
+/* Dark white surfaces → deep dark */
 .dark .bg-white {
-  background-color: #0f172a !important;
-  border-color: #1e293b !important;
+  background-color: #0d1117 !important;
+  border-color: #21262d !important;
 }
 
 .dark .bg-white\/95,
 .dark .bg-white\/90,
-.dark .bg-white\/80 {
-  background-color: rgba(15, 23, 42, 0.95) !important;
-  border-color: #1e293b !important;
+.dark .bg-white\/80,
+.dark .bg-white\/98 {
+  background-color: rgba(13, 17, 23, 0.98) !important;
+  border-color: #21262d !important;
 }
 
+/* Cards and surfaces */
+.dark .card,
+.dark .card-modern {
+  background-color: #0d1117 !important;
+  border-color: #21262d !important;
+}
+
+/* Slate surfaces */
 .dark .bg-slate-50,
 .dark .bg-slate-50\/80,
 .dark .bg-slate-50\/50 {
-  background-color: #1e293b !important;
+  background-color: #161b27 !important;
 }
 
 .dark .bg-slate-100 {
-  background-color: #1e293b !important;
+  background-color: #1c2333 !important;
 }
 
+.dark .bg-slate-200 {
+  background-color: #21262d !important;
+}
+
+/* Slate-900 in dark = deep dark elevated */
+.dark .bg-slate-900,
+.dark .bg-slate-900\/95,
+.dark .bg-slate-900\/98 {
+  background-color: #0d1117 !important;
+}
+
+.dark .bg-slate-800 {
+  background-color: #161b27 !important;
+}
+
+/* ============================================
+   DARK MODE TEXT
+   ============================================ */
 .dark .text-slate-900,
 .dark .text-slate-800 {
-  color: #f8fafc !important;
+  color: #e2e8f0 !important;
 }
 
 .dark .text-slate-700,
@@ -119,26 +186,79 @@ body {
   color: #94a3b8 !important;
 }
 
+.dark .text-slate-300 {
+  color: #b4c0d1 !important;
+}
+
+/* ============================================
+   DARK MODE BORDERS
+   ============================================ */
 .dark .border-slate-200,
 .dark .border-slate-200\/80,
 .dark .border-slate-200\/70,
 .dark .border-slate-200\/60,
 .dark .border-slate-100 {
-  border-color: #1e293b !important;
+  border-color: #21262d !important;
 }
 
+.dark .border-slate-700,
+.dark .border-slate-800 {
+  border-color: #21262d !important;
+}
+
+/* ============================================
+   DARK MODE FORM ELEMENTS
+   ============================================ */
 .dark input,
-.dark select {
-  background-color: #1e293b !important;
-  border-color: #334155 !important;
-  color: #f8fafc !important;
+.dark select,
+.dark textarea {
+  background-color: #161b27 !important;
+  border-color: #2d333b !important;
+  color: #e2e8f0 !important;
 }
 
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* ============================================
+   DARK MODE SVG BRAND
+   ============================================ */
 .dark .brand-text {
   fill: #f8fafc !important;
 }
 
-/* Base Component Classes */
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2d333b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3d4451;
+}
+
+/* ============================================
+   BASE COMPONENT CLASSES
+   ============================================ */
 @layer components {
   /* Primary Button */
   .btn,
@@ -198,7 +318,9 @@ body {
   }
 }
 
-/* Animations */
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -209,11 +331,29 @@ body {
   50% { opacity: 0.85; transform: scale(0.97); }
 }
 
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Toast Container adjustments */
+.animate-slideDown {
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================
+   THEME TRANSITION - Smooth switching on key elements
+   ============================================ */
+html {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ============================================
+   TOAST CONTAINER
+   ============================================ */
 .toast-top-right,
 .toast-bottom-right {
   font-family: inherit !important;

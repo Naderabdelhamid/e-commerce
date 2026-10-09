@@ -1,5 +1,10 @@
 :host {
   display: block;
   min-height: 100vh;
-  background-color: #F8FAFC;
+  background-color: #ffffff;
+}
+
+/* Dark mode: near-black deep dark */
+:host-context(.dark) {
+  background-color: #030712;
 }
