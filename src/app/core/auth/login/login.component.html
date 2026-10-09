@@ -14,17 +14,12 @@
       <label for="login-email" class="auth-label">Email address</label>
       <div class="auth-input-wrapper">
         <i class="fas fa-envelope auth-input-icon"></i>
-        <input
-          id="login-email"
-          type="email"
-          formControlName="email"
-          placeholder="name@example.com"
-          class="auth-input"
-          autocomplete="email"
-        />
+        <input id="login-email" type="email" formControlName="email" placeholder="name@example.com" class="auth-input"
+          autocomplete="email" />
       </div>
       @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
-        <p class="auth-error"><i class="fas fa-circle-exclamation text-[10px]"></i> Please enter a valid email address.</p>
+      <p class="auth-error"><i class="fas fa-circle-exclamation text-[10px]"></i> Please enter a valid email address.
+      </p>
       }
     </div>
 
@@ -32,7 +27,6 @@
     <div class="auth-field">
       <div class="auth-label-row">
         <label for="login-password" class="auth-label">Password</label>
-        <a routerLink="/forgot-password" class="auth-forgot-link">Forgot password?</a>
       </div>
       <div class="auth-input-wrapper">
         <i class="fas fa-lock auth-input-icon"></i>
@@ -53,24 +47,22 @@
           <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
         </button>
       </div>
+      <div class="auth-forgot-row">
+        <a routerLink="/forgot-password" class="auth-forgot-link">Forgot password?</a>
+      </div>
       @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
-        <p class="auth-error"><i class="fas fa-circle-exclamation text-[10px]"></i> Password is required.</p>
+      <p class="auth-error"><i class="fas fa-circle-exclamation text-[10px]"></i> Password is required.</p>
       }
     </div>
 
     <!-- Submit -->
-    <button
-      type="submit"
-      [disabled]="isLoading"
-      class="auth-submit-btn"
-      id="login-submit-btn"
-    >
+    <button type="submit" [disabled]="isLoading" class="auth-submit-btn" id="login-submit-btn">
       @if (isLoading) {
-        <i class="fas fa-spinner fa-spin"></i>
-        <span>Signing in...</span>
+      <i class="fas fa-spinner fa-spin"></i>
+      <span>Signing in...</span>
       } @else {
-        <span>Sign In</span>
-        <i class="fas fa-arrow-right text-sm"></i>
+      <span>Sign In</span>
+      <i class="fas fa-arrow-right text-sm"></i>
       }
     </button>
 

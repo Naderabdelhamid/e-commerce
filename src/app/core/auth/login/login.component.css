@@ -79,6 +79,12 @@
   color: #cbd5e1;
 }
 
+.auth-forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.2rem;
+}
+
 .auth-forgot-link {
   font-size: 0.825rem;
   font-weight: 600;
